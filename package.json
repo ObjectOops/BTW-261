@@ -1,0 +1,34 @@
+{
+  "packageManager": "npm@11.11.0",
+  "name": "app",
+  "private": true,
+  "version": "0.1.0",
+  "browserslist": [
+    "defaults"
+  ],
+  "dependencies": {
+    "@rspack/core": "1.7.10",
+    "compression-webpack-plugin": "^11.1.0",
+    "css-loader": "7.1.4",
+    "css-minimizer-webpack-plugin": "8.0.0",
+    "mini-css-extract-plugin": "2.10.2",
+    "prop-types": "15.8.1",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "react-on-rails": "16.5.0",
+    "rspack-manifest-plugin": "5.2.1",
+    "sass-loader": "^16.0.7",
+    "shakapacker": "9.7.0",
+    "style-loader": "4.0.0"
+  },
+  "devDependencies": {
+    "@rspack/cli": "1.7.10",
+    "@rspack/plugin-react-refresh": "1.6.1",
+    "@swc/core": "1.15.21",
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3",
+    "react-refresh": "0.18.0",
+    "swc-loader": "0.2.7",
+    "typescript": "6.0.2"
+  }
+}
