@@ -1,0 +1,15 @@
+{
+	"name": "Ruby on Rails & MySQL & Node",
+	"dockerComposeFile": "compose.yml",
+	"service": "app",
+	"workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+	"features": {
+		"ghcr.io/devcontainers/features/node:1": {},
+		"ghcr.io/rails/devcontainer/features/mysql-client": {}
+	},
+	"containerEnv": {
+		"DB_HOST": "mysql"
+	},
+	"forwardPorts": [3000],
+	"postCreateCommand": "bin/setup --skip-server"
+}
