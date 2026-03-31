@@ -10,7 +10,7 @@ const HelloWorld: React.FC<HelloWorldProps> = (props) => {
 
   return (
     <div>
-      <h3>Hello, {name}!</h3>
+      <h3>Hello, {name}! This is for BTW 261.</h3>
       <hr />
       <form>
         <label className={style.bright} htmlFor="name">

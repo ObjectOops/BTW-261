@@ -11,5 +11,5 @@
 		"DB_HOST": "mysql"
 	},
 	"forwardPorts": [3000],
-	"postCreateCommand": "bin/setup --skip-server"
+	"postCreateCommand": "gem install foreman && bin/setup --skip-server"
 }
