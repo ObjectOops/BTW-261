@@ -13,6 +13,25 @@ const commonOptions = {
 };
 
 // Copy the object using merge b/c the baseClientWebpackConfig and commonOptions are mutable globals
-const commonWebpackConfig = () => merge({}, baseClientWebpackConfig, commonOptions);
+const commonWebpackConfig = () => {
+  const baseWebpackConfig = merge({}, baseClientWebpackConfig, commonOptions);
+
+  // Fix CSS modules to use default exports for backward compatibility
+  baseWebpackConfig.module.rules.forEach((rule) => {
+    if (rule.use && Array.isArray(rule.use)) {
+      const cssLoader = rule.use.find((loader) => {
+        const loaderName = typeof loader === 'string' ? loader : loader?.loader;
+        return loaderName?.includes('css-loader');
+      });
+
+      if (cssLoader?.options?.modules) {
+        cssLoader.options.modules.namedExport = false;
+        cssLoader.options.modules.exportLocalsConvention = 'camelCase';
+      }
+    }
+  });
+
+  return baseWebpackConfig;
+};
 
 module.exports = commonWebpackConfig;

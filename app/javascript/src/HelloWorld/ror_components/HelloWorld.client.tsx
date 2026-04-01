@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import * as style from './HelloWorld.module.css';
+import styles from './HelloWorld.module.css';
 
 interface HelloWorldProps {
   name: string;
@@ -10,10 +10,10 @@ const HelloWorld: React.FC<HelloWorldProps> = (props) => {
 
   return (
     <div>
-      <h3>Hello, {name}! This is for BTW 261.</h3>
+      <h3>Hello, {name}!</h3>
       <hr />
       <form>
-        <label className={style.bright} htmlFor="name">
+        <label className={styles.bright} htmlFor="name">
           Say hello to:
           <input id="name" type="text" value={name} onChange={(e) => setName(e.target.value)} />
         </label>

@@ -1,0 +1,37 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Start Rails (HMR)",
+            "type": "shell",
+            "command": "./bin/dev",
+            "icon": {
+                "id": "ruby",
+                "color": "terminal.ansiRed"
+            },
+            "isBackground": true,
+            "problemMatcher": []
+        },
+        {
+            "label": "Start Rails (Static)",
+            "type": "shell",
+            "command": "./bin/dev static",
+            "icon": {
+                "id": "ruby",
+                "color": "terminal.ansiRed"
+            },
+            "isBackground": true,
+            "problemMatcher": []
+        },
+        {
+            "label": "Stop Rails",
+            "type": "shell",
+            "command": "kill -s SIGINT $(cat tmp/pids/server.pid)",
+            "icon": {
+                "id": "ruby",
+                "color": "terminal.ansiRed"
+            },
+            "problemMatcher": []
+        }
+    ]
+}
