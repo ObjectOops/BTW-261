@@ -1,8 +1,4 @@
-#!/usr/bin/env ruby
+#!/bin/sh
 
-ruby_activated = system("source /home/foodstuff/rubyvenv/BTW-261/3.2/bin/activate")
-node_activated = system("source /home/foodstuff/nodevenv/BTW-261/18/bin/activate")
-
-if ruby_activated && node_activated
-  puts "Activated"
-end
+source /home/foodstuff/rubyvenv/BTW-261/3.2/bin/activate
+source /home/foodstuff/nodevenv/BTW-261/18/bin/activate
