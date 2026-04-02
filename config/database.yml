@@ -50,6 +50,6 @@ test:
 #
 production:
   <<: *default
-  database: btw_261_production
-  username: btw_261
-  password: <%= ENV["BTW_261_DATABASE_PASSWORD"] %>
+  database: <%= Rails.application.credentials.dig(:database, :name) %>
+  username: <%= Rails.application.credentials.dig(:database, :username) %>
+  password: <%= Rails.application.credentials.dig(:database, :password) %>
