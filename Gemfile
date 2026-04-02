@@ -19,4 +19,4 @@ end
 
 gem "react_on_rails", "= 16.5"
 
-gem "shakapacker", "= 9.7"
+gem "shakapacker", "= 9.2"
