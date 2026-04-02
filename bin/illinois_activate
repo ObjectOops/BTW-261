@@ -1,0 +1,4 @@
+#!/usr/bin/env ruby
+
+source /home/foodstuff/rubyvenv/BTW-261/3.2/bin/activate
+source /home/foodstuff/nodevenv/BTW-261/18/bin/activate
