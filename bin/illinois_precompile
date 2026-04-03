@@ -1,0 +1,6 @@
+#!/bin/sh
+
+source ./bin/illinois_activate
+
+./bin/rake react_on_rails:generate_packs
+RAILS_ENV=production bundle exec rails assets:precompile
