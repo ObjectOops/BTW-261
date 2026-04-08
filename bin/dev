@@ -63,15 +63,13 @@
 
 require 'erb'
 
-if ENV["CODESPACES"] == "true"
-  print "📦 Preparing config/shakapacker_codespaces.yml for Codespaces... "
-  app_path = File.expand_path(".", Dir.pwd)
-  shakapacker_config = File.join(app_path, "config/shakapacker.yml")
-  shakapacker_codespaces_config = File.join(app_path, "config/shakapacker_codespaces.yml")
-  File.write(shakapacker_codespaces_config, ERB.new(File.read(shakapacker_config)).result)
-  ENV["SHAKAPACKER_CONFIG"] = shakapacker_codespaces_config
-  puts "✅"
-end
+print "📦 Preparing config/shakapacker_codespaces.yml with ERB... "
+app_path = File.expand_path(".", Dir.pwd)
+shakapacker_config = File.join(app_path, "config/shakapacker.yml")
+shakapacker_generated_config = File.join(app_path, "config/shakapacker_generated.yml")
+File.write(shakapacker_generated_config, ERB.new(File.read(shakapacker_config)).result)
+ENV["SHAKAPACKER_CONFIG"] = shakapacker_generated_config
+puts "✅"
 
 require "bundler/setup"
 require "react_on_rails/dev"
