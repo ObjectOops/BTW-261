@@ -26,7 +26,8 @@
         {
             "label": "Stop Rails",
             "type": "shell",
-            "command": "kill -s SIGINT $(cat tmp/pids/server.pid)",
+            // "command": "kill -s SIGINT $(cat tmp/pids/server.pid)",
+            "command": "./bin/dev kill",
             "icon": {
                 "id": "ruby",
                 "color": "terminal.ansiRed"

@@ -10,6 +10,6 @@
 	"containerEnv": {
 		"DB_HOST": "mysql"
 	},
-	"forwardPorts": [3000],
+	// "forwardPorts": [3000, 3035],
 	"postCreateCommand": "bin/setup --skip-server && gem install foreman"
 }
