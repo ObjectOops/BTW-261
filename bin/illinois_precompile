@@ -2,7 +2,7 @@
 
 source ./bin/illinois_activate
 
-RAILS_ENV=production
+export RAILS_ENV=production
 
 ./bin/rails react_on_rails:generate_packs
 ./bin/rails assets:precompile
