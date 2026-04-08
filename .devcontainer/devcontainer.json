@@ -10,6 +10,7 @@
 	"containerEnv": {
 		"DB_HOST": "mysql"
 	},
-	"forwardPorts": [3000],
-	"postCreateCommand": "bin/setup --skip-server && gem install foreman"
+	// "forwardPorts": [3000, 3035],
+	// `bash -i` since nvm needs to be "sourced".
+	"postCreateCommand": "bash -i .devcontainer/setup.sh"
 }

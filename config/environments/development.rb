@@ -54,4 +54,7 @@ Rails.application.configure do
 
   # Raise error when a before_action's only/except options reference missing actions.
   config.action_controller.raise_on_missing_callback_actions = true
+
+  # Disable X-Frame-Options for embedded views in development.
+  config.action_dispatch.default_headers.delete('X-Frame-Options')
 end

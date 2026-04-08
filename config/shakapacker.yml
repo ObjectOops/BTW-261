@@ -1,3 +1,6 @@
+# Note: ./bin/dev has been patched to pass this file through ERB 
+# to provide support for Codespaces port forwarding with Webpack HMR.
+
 # Note: You must restart bin/shakapacker-dev-server for changes to take effect
 # This file contains the defaults used by shakapacker.
 
@@ -116,14 +119,15 @@ development:
       # Should we show a full-screen overlay in the browser when there are compiler errors or warnings?
       overlay: true
       # May also be a string
-      # webSocketURL:
-      #  hostname: '0.0.0.0'
-      #  pathname: '/ws'
-      #  port: 8080
+      webSocketURL:
+        protocol: '<%= ENV["CODESPACES"] == "true" ? "wss" : "ws" %>'
+        hostname: '<%= ENV["CODESPACES"] == "true" ? "#{ENV["CODESPACE_NAME"]}-3035.#{ENV["GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN"]}" : "0.0.0.0" %>'
+        pathname: '/ws'
+        port: '<%= ENV["CODESPACES"] == "true" ? 443 : 3035 %>'
     # Should we use gzip compression?
     compress: true
     # Note that apps that do not check the host are vulnerable to DNS rebinding attacks
-    allowed_hosts: 'auto'
+    allowed_hosts: '<%= ENV["CODESPACES"] == "true" ? "all" : "auto" %>'
     # Shows progress and colorizes output of bin/shakapacker[-dev-server]
     pretty: true
     headers:

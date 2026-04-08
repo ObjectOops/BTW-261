@@ -1,8 +1,5 @@
 # BTW-261
 
-```sh
-# Use the same version of Node as prod if necessary.
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/ObjectOops/BTW-261/tree/staging?quickstart=1)
 
-nvm install 18.20.8
-nvm use 18.20.8
-```
+This is a **Ruby on Rails + React** app.
