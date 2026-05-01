@@ -2,6 +2,14 @@ Rails.application.routes.draw do
   get 'hello_world', to: 'hello_world#index'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
+  resources :photo_submissions, only: [:index, :create]
+  
+  # Routes for admins to review photos, fetch the raw image data, and delete them
+  resources :admin_reviews, only: [:index, :destroy] do
+    member do
+      get :image # Creates the /admin_reviews/:id/image endpoint
+    end
+  end
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check

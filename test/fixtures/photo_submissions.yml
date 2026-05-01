@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  net_ids: MyString
+  image_data: 
+  image_content_type: MyString
+
+two:
+  net_ids: MyString
+  image_data: 
+  image_content_type: MyString

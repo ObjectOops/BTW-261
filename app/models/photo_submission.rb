@@ -1,0 +1,2 @@
+class PhotoSubmission < ApplicationRecord
+end
