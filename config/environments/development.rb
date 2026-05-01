@@ -57,4 +57,12 @@ Rails.application.configure do
 
   # Disable X-Frame-Options for embedded views in development.
   config.action_dispatch.default_headers.delete('X-Frame-Options')
+
+  # Codespaces proxies HTTPS → HTTP without rewriting the Host header, so
+  # request.base_url stays http://localhost:3000 while the browser sends
+  # Origin: https://<codespace>. The CSRF origin check fails on that mismatch.
+  # Disabling origin check here is safe: the authenticity token is still verified.
+  if ENV["CODESPACES"] == "true"
+    config.action_controller.forgery_protection_origin_check = false
+  end
 end
