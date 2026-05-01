@@ -16,4 +16,12 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_01_025358) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "photo_submissions", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "image_content_type"
+    t.binary "image_data", size: :long
+    t.string "net_ids"
+    t.datetime "updated_at", null: false
+  end
 end
