@@ -1,15 +1,12 @@
 Rails.application.routes.draw do
-  get 'hello_world', to: 'hello_world#index'
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
-  # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check
 
-  # Render dynamic PWA files from app/views/pwa/* (remember to link manifest in application.html.erb)
-  # get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
-  # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
+  # These lines are all you need for your feature!
+  # Your page will be accessible at: localhost:3000/kitchens
+  resources :kitchens do
+    resources :reservations, only: [:new, :create, :index, :destroy]
+  end
 
-  # Defines the root path route ("/")
-  root "hello_world#index"
-end
+  # add root path down here
+  # root "home#index" 
+ end

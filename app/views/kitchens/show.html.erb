@@ -1,0 +1,37 @@
+<%= link_to "← Back to all kitchens", root_path %>
+
+<h2><%= @kitchen.name %></h2>
+<p><strong>Location:</strong> <%= @kitchen.location %></p>
+<p><strong>Capacity:</strong> <%= @kitchen.capacity %> people</p>
+
+<hr>
+
+<h3>Book this Kitchen</h3>
+<%= form_with(model: [@kitchen, @kitchen.reservations.build], local: true) do |form| %>
+  <div>
+    <%= form.label :start_time, "Start Time:" %>
+    <%= form.datetime_field :start_time %>
+  </div>
+  <br>
+  <div>
+    <%= form.label :end_time, "End Time:" %>
+    <%= form.datetime_field :end_time %>
+  </div>
+  <br>
+  <%= form.submit "Confirm Reservation" %>
+<% end %>
+
+<hr>
+
+<h3>Current Reservations</h3>
+<ul>
+  <% @reservations.each do |reservation| %>
+    <% if reservation.persisted? %>
+      <li>
+        <%= reservation.start_time.strftime("%B %d, %Y at %I:%M %p") %> 
+        to 
+        <%= reservation.end_time.strftime("%I:%M %p") %>
+      </li>
+    <% end %>
+  <% end %>
+</ul>
