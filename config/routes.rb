@@ -14,4 +14,11 @@ Rails.application.routes.draw do
 
   resources :comments, only: [:index, :create]
   get "/admin", to: "admin#index"
+
+  get  "/recipes",                     to: "recipes#index"
+  get  "/recipes/:slug",               to: "recipes#show",           as: :recipe
+  get  "/recipes/:slug/comment",       to: "recipe_comments#new",    as: :new_recipe_comment
+  post "/recipes/:slug/comments",      to: "recipe_comments#create", as: :recipe_comments
+  get  "/admin/recipe-comments",       to: "admin_recipe_comments#index"
+  delete "/admin/recipe-comments/:id", to: "admin_recipe_comments#destroy", as: :admin_recipe_comment
 end
