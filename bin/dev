@@ -63,7 +63,7 @@
 
 require 'erb'
 
-print "📦 Preparing config/shakapacker_codespaces.yml with ERB... "
+print "📦 Preparing config/shakapacker_generated.yml with ERB... "
 app_path = File.expand_path(".", Dir.pwd)
 shakapacker_config = File.join(app_path, "config/shakapacker.yml")
 shakapacker_generated_config = File.join(app_path, "config/shakapacker_generated.yml")
@@ -77,7 +77,7 @@ require "react_on_rails/dev"
 # Default route configuration
 # This is set by the ReactOnRails installer to point to your generated component.
 # Change this to your preferred default route, or pass --route=<route> to override.
-DEFAULT_ROUTE = "hello_world"
+DEFAULT_ROUTE = ""
 
 # Main execution
 # Add the default route to ARGV if no --route option is provided
