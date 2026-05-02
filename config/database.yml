@@ -12,6 +12,9 @@
 default: &default
   adapter: mysql2
   encoding: utf8mb4
+  # utf8mb4_unicode_ci is compatible with both MySQL 8.0 and MariaDB (prod runs MariaDB 10.6).
+  # Do NOT use utf8mb4_0900_ai_ci — it's MySQL 8.0 only and will break on MariaDB.
+  collation: utf8mb4_unicode_ci
   max_connections: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: root
   password:

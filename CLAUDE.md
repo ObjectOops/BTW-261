@@ -4,7 +4,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Stack
 
-Ruby on Rails 8.1 backend + React 19 (TypeScript) frontend, connected via the **React on Rails** gem. Asset bundling uses **Shakapacker 9.2 + Rspack** (faster Webpack alternative) with SWC transpilation. Database is MySQL. Server-side rendering (SSR) is enabled.
+Ruby on Rails 8.1 backend + React 19 (TypeScript) frontend, connected via the **React on Rails** gem. Asset bundling uses **Shakapacker 9.2 + Rspack** (faster Webpack alternative) with SWC transpilation. Database is MySQL (dev) / **MariaDB 10.6 (production)**. Server-side rendering (SSR) is enabled.
+
+### Database compatibility note
+
+Production runs **MariaDB 10.6**, not MySQL 8.0. Key constraint: **never use `utf8mb4_0900_ai_ci`** — it is MySQL 8.0-only and will cause `db:migrate` / `db:schema:load` to fail on MariaDB with "unknown collation". Always use `utf8mb4_unicode_ci`. This is enforced via `collation: utf8mb4_unicode_ci` in `config/database.yml`, but if you run a schema dump from a MySQL 8.0 dev machine, verify no `0900` collations sneak into `db/schema.rb` before committing.
 
 ## Commands
 

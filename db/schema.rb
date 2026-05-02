@@ -9,15 +9,20 @@
 # migrations use external dependencies or application code.
 #
 # It's strongly recommended that you check this file into your version control system.
+#
+# IMPORTANT: Production runs MariaDB 10.6, not MySQL 8.0.
+# All tables must use collation: "utf8mb4_unicode_ci" — NOT "utf8mb4_0900_ai_ci"
+# (0900 is MySQL 8.0-only and will cause `db:migrate` to fail on MariaDB).
+# The collation is enforced in config/database.yml, but verify after any schema dump.
 
 ActiveRecord::Schema[8.1].define(version: 2026_05_01_213647) do
-  create_table "comments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "comments", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.text "body", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "kitchens", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "kitchens", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.integer "capacity"
     t.datetime "created_at", null: false
     t.string "location"
@@ -25,7 +30,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_01_213647) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "photo_submissions", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "photo_submissions", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "image_content_type"
     t.binary "image_data", size: :long
@@ -33,7 +38,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_01_213647) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "recipe_comments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "recipe_comments", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.text "body", null: false
     t.datetime "created_at", null: false
     t.string "recipe_slug", null: false
@@ -41,7 +46,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_01_213647) do
     t.index ["recipe_slug"], name: "index_recipe_comments_on_recipe_slug"
   end
 
-  create_table "reservations", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "reservations", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "end_time"
     t.bigint "kitchen_id", null: false
