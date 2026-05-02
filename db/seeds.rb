@@ -7,3 +7,14 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+# Clear out old data so we don't create duplicates if we run this multiple times
+Reservation.destroy_all
+Kitchen.destroy_all
+
+# Create a couple of dummy kitchens
+Kitchen.create!(name: "ISR Kitchen", location: "Floor 1", capacity: 4)
+Kitchen.create!(name: "PAR Kitchen", location: "Basement", capacity: 4)
+Kitchen.create!(name: "IKE Kitchen", location: "Scott Hall", capacity: 4)
+Kitchen.create!(name: "IKE Kitchen", location: "Weston Hall", capacity: 4)
+
+puts "Seed data successfully created!"

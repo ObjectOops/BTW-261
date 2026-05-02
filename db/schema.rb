@@ -17,6 +17,14 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_01_213647) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "kitchens", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.integer "capacity"
+    t.datetime "created_at", null: false
+    t.string "location"
+    t.string "name"
+    t.datetime "updated_at", null: false
+  end
+
   create_table "photo_submissions", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "image_content_type"
@@ -32,4 +40,15 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_01_213647) do
     t.datetime "updated_at", null: false
     t.index ["recipe_slug"], name: "index_recipe_comments_on_recipe_slug"
   end
+
+  create_table "reservations", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "end_time"
+    t.bigint "kitchen_id", null: false
+    t.datetime "start_time"
+    t.datetime "updated_at", null: false
+    t.index ["kitchen_id"], name: "index_reservations_on_kitchen_id"
+  end
+
+  add_foreign_key "reservations", "kitchens"
 end
