@@ -10,8 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< Updated upstream
 ActiveRecord::Schema[8.1].define(version: 2026_04_30_170331) do
   create_table "kitchens", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+=======
+ActiveRecord::Schema[8.1].define(version: 2026_05_02_042100) do
+  create_table "comments", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
+    t.text "body", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "kitchens", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
+>>>>>>> Stashed changes
     t.integer "capacity"
     t.datetime "created_at", null: false
     t.string "location"
@@ -23,6 +34,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_30_170331) do
     t.datetime "created_at", null: false
     t.datetime "end_time"
     t.bigint "kitchen_id", null: false
+    t.string "netid"
     t.datetime "start_time"
     t.datetime "updated_at", null: false
     t.index ["kitchen_id"], name: "index_reservations_on_kitchen_id"
