@@ -1,5 +1,4 @@
 class AdminReviewsController < ApplicationController
-  skip_before_action :verify_authenticity_token, only: [:destroy]
   def index
     # We select only the metadata to pass to React, avoiding loading heavy BLOBs in the initial payload
     @submissions = PhotoSubmission.select(:id, :net_ids, :created_at).order(created_at: :desc)

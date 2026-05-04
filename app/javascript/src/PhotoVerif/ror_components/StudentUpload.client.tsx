@@ -1,4 +1,3 @@
-// app/javascript/src/PhotoVerification/StudentUpload.client.tsx
 import React, { useState } from 'react';
 
 const StudentUpload = () => {

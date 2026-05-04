@@ -1,4 +1,3 @@
-// app/javascript/src/PhotoVerification/AdminReview.client.tsx
 import React, { useState } from 'react';
 
 interface Submission {

@@ -1,7 +1,4 @@
 class PhotoSubmissionsController < ApplicationController
-  # Bypasses CSRF token validation, which often fails in Codespaces due to cookie blocking
-  skip_before_action :verify_authenticity_token, only: [:create]
-
   def index
   end
 
