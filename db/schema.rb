@@ -9,13 +9,8 @@
 # migrations use external dependencies or application code.
 #
 # It's strongly recommended that you check this file into your version control system.
-#
-# IMPORTANT: Production runs MariaDB 10.6, not MySQL 8.0.
-# All tables must use collation: "utf8mb4_unicode_ci" — NOT "utf8mb4_0900_ai_ci"
-# (0900 is MySQL 8.0-only and will cause `db:migrate` to fail on MariaDB).
-# The collation is enforced in config/database.yml, but verify after any schema dump.
 
-ActiveRecord::Schema[8.1].define(version: 2026_05_01_213647) do
+ActiveRecord::Schema[8.1].define(version: 2026_05_02_042100) do
   create_table "comments", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.text "body", null: false
     t.datetime "created_at", null: false
@@ -50,6 +45,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_01_213647) do
     t.datetime "created_at", null: false
     t.datetime "end_time"
     t.bigint "kitchen_id", null: false
+    t.string "netid"
     t.datetime "start_time"
     t.datetime "updated_at", null: false
     t.index ["kitchen_id"], name: "index_reservations_on_kitchen_id"
