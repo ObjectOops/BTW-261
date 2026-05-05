@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_05_05_034633) do
+ActiveRecord::Schema[8.1].define(version: 2026_05_05_142216) do
   create_table "comments", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.text "body", null: false
     t.datetime "created_at", null: false
@@ -43,6 +43,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_05_034633) do
   end
 
   create_table "reservations", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
+    t.text "additional_netids"
+    t.text "comment"
     t.datetime "created_at", null: false
     t.datetime "end_time"
     t.bigint "kitchen_id", null: false

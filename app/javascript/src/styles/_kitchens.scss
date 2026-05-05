@@ -1,0 +1,443 @@
+// ── Kitchens index ───────────────────────────────────────────────────────────
+
+.kitchens-index {
+  &__hero {
+    background-color: var(--island-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 2rem;
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  &__title {
+    font-size: 1.75rem;
+    color: var(--text-color);
+    margin: 0 0 0.5rem;
+  }
+
+  &__subtitle {
+    color: var(--text-muted);
+    margin: 0;
+  }
+
+  &__section-heading {
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+  }
+
+  &__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.25rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background: var(--island-bg);
+    transition: border-color 0.15s;
+
+    &:hover {
+      border-color: var(--card-hover-border);
+    }
+  }
+
+  &__item-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  &__item-name {
+    font-weight: 600;
+    color: var(--text-color);
+  }
+
+  &__item-meta {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+  }
+
+  &__item-link {
+    font-size: 0.9rem;
+    color: var(--link-color);
+    text-decoration: none;
+    white-space: nowrap;
+
+    &:hover {
+      color: var(--link-hover);
+      text-decoration: underline;
+    }
+  }
+}
+
+// ── Kitchen show ─────────────────────────────────────────────────────────────
+
+.kitchen-show {
+  &__back {
+    display: inline-block;
+    font-size: 0.875rem;
+    color: var(--link-color);
+    text-decoration: none;
+    margin-bottom: 1.25rem;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &__header {
+    margin-bottom: 1.5rem;
+  }
+
+  &__name {
+    font-size: 1.75rem;
+    margin: 0 0 0.25rem;
+    color: var(--text-color);
+  }
+
+  &__meta {
+    color: var(--text-muted);
+    margin: 0;
+  }
+}
+
+// ── Calendar ─────────────────────────────────────────────────────────────────
+
+$calendar-cell-height: 48px; // must match CELL_HEIGHT in KitchenShow.tsx
+$calendar-time-width: 4rem;
+
+.kitchen-calendar {
+  margin-bottom: 2rem;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  overflow: hidden;
+  font-size: 0.8rem;
+
+  &__nav {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.6rem 0.75rem;
+    border-bottom: 1px solid var(--border-color);
+    background: var(--island-bg);
+  }
+
+  &__nav-btn {
+    background: none;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    padding: 0.3rem 0.75rem;
+    font-size: 0.8rem;
+    color: var(--link-color);
+    cursor: pointer;
+    transition: background 0.1s;
+
+    &:hover:not(:disabled) {
+      background: var(--border-color);
+    }
+
+    &:disabled {
+      opacity: 0.4;
+      cursor: default;
+    }
+  }
+
+  &__week-label {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+  }
+
+  // Single scroll container — header and body share the same scrollable width
+  // so no misalignment when the scrollbar appears.
+  &__scroll {
+    max-height: 560px;
+    overflow-y: auto;
+  }
+
+  // Sticky header row inside the scroll container
+  &__header-row {
+    display: flex;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    border-bottom: 2px solid var(--border-color);
+    background: var(--island-bg);
+  }
+
+  &__time-spacer {
+    width: $calendar-time-width;
+    flex-shrink: 0;
+    border-right: 1px solid var(--border-color);
+  }
+
+  &__day-header {
+    flex: 1;
+    padding: 0.4rem 0.25rem;
+    text-align: center;
+    border-right: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+
+    &--today {
+      background: color-mix(in srgb, var(--link-color) 8%, var(--island-bg));
+
+      .kitchen-calendar__day-name {
+        color: var(--link-color);
+        font-weight: 700;
+      }
+    }
+  }
+
+  &__day-name {
+    font-weight: 600;
+    color: var(--text-color);
+  }
+
+  &__day-date {
+    color: var(--text-muted);
+    font-size: 0.72rem;
+  }
+
+  &__body {
+    display: flex;
+  }
+
+  // Time labels column
+  &__time-col {
+    width: $calendar-time-width;
+    flex-shrink: 0;
+    border-right: 1px solid var(--border-color);
+    background: var(--island-bg);
+  }
+
+  &__time-label {
+    height: $calendar-cell-height;
+    display: flex;
+    align-items: flex-start;
+    padding: 0.2rem 0.4rem 0 0;
+    justify-content: flex-end;
+    color: var(--text-muted);
+    font-size: 0.72rem;
+    white-space: nowrap;
+    border-bottom: 1px solid var(--border-color);
+    box-sizing: border-box;
+  }
+
+  // Day columns container
+  &__days {
+    display: flex;
+    flex: 1;
+  }
+
+  // Individual day column — events are absolute inside here
+  &__day-col {
+    flex: 1;
+    position: relative;
+    height: calc(14 * #{$calendar-cell-height});
+    border-right: 1px solid var(--border-color);
+    min-width: 0;
+  }
+
+  &__grid-line {
+    height: $calendar-cell-height;
+    border-bottom: 1px solid var(--border-color);
+    box-sizing: border-box;
+    pointer-events: none;
+  }
+
+  &__event {
+    position: absolute;
+    left: 2px;
+    right: 2px;
+    background: color-mix(in srgb, var(--link-color) 18%, var(--island-bg));
+    border-left: 3px solid var(--link-color);
+    border-radius: 3px;
+    padding: 0.2rem 0.35rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+    overflow: hidden;
+    box-sizing: border-box;
+    z-index: 1;
+
+    &--own {
+      background: color-mix(in srgb, var(--nav-accent) 18%, var(--island-bg));
+      border-left-color: var(--nav-accent);
+    }
+  }
+
+  &__event-netid {
+    font-weight: 600;
+    color: var(--text-color);
+    font-size: 0.75rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__event-time {
+    color: var(--text-muted);
+    font-size: 0.7rem;
+  }
+
+  &__event-delete {
+    align-self: flex-start;
+    background: none;
+    border: none;
+    color: var(--link-color);
+    cursor: pointer;
+    font-size: 0.7rem;
+    padding: 0;
+    line-height: 1;
+    margin-top: auto;
+
+    &:hover {
+      color: var(--link-hover);
+    }
+
+    &:disabled {
+      opacity: 0.5;
+    }
+  }
+}
+
+// ── Reservation form ──────────────────────────────────────────────────────────
+
+.reservation-form {
+  border-top: 1px solid var(--border-color);
+  padding-top: 1.5rem;
+
+  &__heading {
+    font-size: 1.25rem;
+    margin: 0 0 0.25rem;
+    color: var(--text-color);
+  }
+
+  &__auth-note {
+    color: var(--text-muted);
+    font-size: 0.875rem;
+    margin: 0 0 1.25rem;
+  }
+
+  &__errors {
+    background: color-mix(in srgb, #c00 10%, var(--island-bg));
+    border: 1px solid #c00;
+    border-radius: 6px;
+    color: #c00;
+    padding: 0.75rem 1rem;
+    margin-bottom: 1rem;
+    list-style: disc;
+    padding-left: 1.75rem;
+    font-size: 0.875rem;
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 480px;
+  }
+
+  &__row {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  &__label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-color);
+  }
+
+  &__hint {
+    font-weight: 400;
+    color: var(--text-muted);
+  }
+
+  &__input,
+  &__select {
+    padding: 0.5rem 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    background: var(--island-bg);
+    color: var(--text-color);
+    font-size: 0.9rem;
+
+    &:focus {
+      outline: 2px solid var(--link-color);
+      outline-offset: 1px;
+      border-color: transparent;
+    }
+  }
+
+  &__textarea {
+    padding: 0.5rem 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    background: var(--island-bg);
+    color: var(--text-color);
+    font-size: 0.9rem;
+    resize: vertical;
+    font-family: inherit;
+
+    &:focus {
+      outline: 2px solid var(--link-color);
+      outline-offset: 1px;
+      border-color: transparent;
+    }
+  }
+
+  &__submit {
+    align-self: flex-start;
+    background: var(--link-color);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 0.6rem 1.25rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s;
+
+    &:hover:not(:disabled) {
+      background: var(--link-hover);
+    }
+
+    &:disabled {
+      opacity: 0.6;
+      cursor: default;
+    }
+  }
+
+  &--guest {
+    border-top: 1px solid var(--border-color);
+    padding-top: 1.5rem;
+  }
+
+  &__login-prompt {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+
+    a {
+      color: var(--link-color);
+
+      &:hover {
+        color: var(--link-hover);
+      }
+    }
+  }
+}
