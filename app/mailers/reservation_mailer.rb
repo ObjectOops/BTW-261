@@ -19,8 +19,8 @@ class ReservationMailer
 
       ‼️This is a friendly reminder of a few important guidelines to follow during your reservation:
 
-      . Before you begin using the kitchen, please take clear photos of the space and upload them as required.
-      . After you finish, please take another set of photos to document the condition of the kitchen and upload them as well.
+      • Before you begin using the kitchen, please take clear photos of the space and upload them as required.
+      • After you finish, please take another set of photos to document the condition of the kitchen and upload them as well.
 
       These steps help us maintain a clean and fair shared environment for all residents.
 
