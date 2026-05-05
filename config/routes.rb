@@ -13,6 +13,8 @@ Rails.application.routes.draw do
     resources :reservations, only: [:new, :create, :index, :destroy]
   end
 
+  get 'kitchen-rules', to: 'kitchen_rules#show', as: :kitchen_rules
+
   resources :photos,   only: [:index, :create], controller: 'photo_submissions'
   resources :comments, only: [:index, :create]
 

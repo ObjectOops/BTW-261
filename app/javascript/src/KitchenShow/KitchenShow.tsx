@@ -175,7 +175,10 @@ const KitchenShow: React.FC<Props> = ({ kitchen, reservations: initialReservatio
 
   return (
     <div className="page-island kitchen-show">
-      <a href="/kitchens" className="kitchen-show__back">← All Kitchens</a>
+      <div className="kitchen-show__nav">
+        <a href="/kitchens" className="kitchen-show__back">← All Kitchens</a>
+        <a href="/kitchen-rules" className="kitchen-show__rules-link">‼️Kitchen Rules‼️</a>
+      </div>
 
       <div className="kitchen-show__header">
         <h1 className="kitchen-show__name">{kitchen.name}</h1>
