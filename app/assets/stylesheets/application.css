@@ -14,7 +14,7 @@
  * The full design system lives in app/javascript/src/styles/ (compiled via Shakapacker).
  * These rules apply the minimum needed before that JS bundle executes.
  * 
- * Addendum: These styles were produced in an attempt to resolve the FUOC issue described above.
+ * Addendum: These styles were produced in an attempt to resolve the FOUC issue described above.
  * The issue has been resolved another way, but we're keeping this as a "fallback".
  */
 
