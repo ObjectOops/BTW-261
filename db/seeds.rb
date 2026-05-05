@@ -7,6 +7,7 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+
 # Clear out old data so we don't create duplicates if we run this multiple times
 Reservation.destroy_all
 Kitchen.destroy_all

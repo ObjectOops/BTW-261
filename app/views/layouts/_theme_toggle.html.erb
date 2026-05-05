@@ -1,0 +1,21 @@
+<button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode"></button>
+
+<script>
+  (function() {
+    var btn = document.getElementById('theme-toggle');
+    var html = document.documentElement;
+
+    function updateLabel() {
+      btn.textContent = html.classList.contains('dark') ? '☀ Light' : '☾ Dark';
+    }
+
+    updateLabel();
+
+    btn.addEventListener('click', function() {
+      var isDark = html.classList.toggle('dark');
+      var expiry = new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toUTCString();
+      document.cookie = 'color_scheme=' + (isDark ? 'dark' : 'light') + '; path=/; expires=' + expiry;
+      updateLabel();
+    });
+  })();
+</script>

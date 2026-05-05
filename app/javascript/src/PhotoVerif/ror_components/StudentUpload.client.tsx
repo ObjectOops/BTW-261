@@ -1,4 +1,3 @@
-// app/javascript/src/PhotoVerification/StudentUpload.client.tsx
 import React, { useState } from 'react';
 
 const StudentUpload = () => {
@@ -19,7 +18,7 @@ const StudentUpload = () => {
     const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '';
 
     try {
-      const response = await fetch('/photo_submissions', {
+      const response = await fetch('/photos', {
         method: 'POST',
         headers: { 'X-CSRF-Token': csrfToken },
         body: formData,

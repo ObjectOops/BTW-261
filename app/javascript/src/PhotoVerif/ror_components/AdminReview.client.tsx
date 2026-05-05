@@ -1,5 +1,4 @@
-// app/javascript/src/PhotoVerification/AdminReview.client.tsx
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 interface Submission {
   id: number;
@@ -16,7 +15,7 @@ const AdminReview = ({ initialSubmissions }: Props) => {
   const handleReview = async (id: number) => {
     const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '';
 
-    const response = await fetch(`/admin_reviews/${id}`, {
+    const response = await fetch(`/management/photo_reviews/${id}`, {
       method: 'DELETE',
       headers: { 'X-CSRF-Token': csrfToken },
     });
@@ -40,7 +39,7 @@ const AdminReview = ({ initialSubmissions }: Props) => {
             <p><strong>NetIDs:</strong> {sub.net_ids}</p>
             {/* The image src points directly to the controller endpoint we made */}
             <img 
-              src={`/admin_reviews/${sub.id}/image`} 
+              src={`/management/photo_reviews/${sub.id}/image`}
               alt="Verification" 
               style={{ maxWidth: '300px', display: 'block', marginBottom: '1rem' }} 
             />

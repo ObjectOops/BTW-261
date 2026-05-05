@@ -1,0 +1,47 @@
+<nav class="site-navbar">
+  <button class="navbar-hamburger" id="navbar-hamburger" aria-label="Toggle navigation" aria-expanded="false">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+  <a href="/" class="navbar-brand">Foodstuff</a>
+</nav>
+
+<div class="navbar-overlay" id="navbar-overlay"></div>
+
+<div class="navbar-menu" id="navbar-menu" aria-hidden="true">
+  <a href="/" class="navbar-menu-link">Home</a>
+  <a href="/recipes" class="navbar-menu-link">Recipes</a>
+  <a href="/kitchens" class="navbar-menu-link">Kitchen Reservations</a>
+  <a href="/photos" class="navbar-menu-link">Photo Submissions</a>
+</div>
+
+<script>
+  (function() {
+    var btn = document.getElementById('navbar-hamburger');
+    var menu = document.getElementById('navbar-menu');
+    var overlay = document.getElementById('navbar-overlay');
+
+    function openMenu() {
+      btn.classList.add('open');
+      menu.classList.add('open');
+      overlay.classList.add('open');
+      btn.setAttribute('aria-expanded', 'true');
+      menu.setAttribute('aria-hidden', 'false');
+    }
+
+    function closeMenu() {
+      btn.classList.remove('open');
+      menu.classList.remove('open');
+      overlay.classList.remove('open');
+      btn.setAttribute('aria-expanded', 'false');
+      menu.setAttribute('aria-hidden', 'true');
+    }
+
+    btn.addEventListener('click', function() {
+      menu.classList.contains('open') ? closeMenu() : openMenu();
+    });
+
+    overlay.addEventListener('click', closeMenu);
+  })();
+</script>

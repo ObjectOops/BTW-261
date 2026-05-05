@@ -1,0 +1,42 @@
+.site-footer {
+  background: var(--footer-bg);
+  color: var(--footer-text);
+  padding: 0.6rem 1.5rem;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 1.25rem;
+  font-size: 0.82rem;
+  margin-top: auto;
+}
+
+.site-footer a {
+  color: var(--footer-text);
+  text-decoration: none;
+
+  &:hover {
+    color: var(--nav-accent);
+    text-decoration: none;
+  }
+}
+
+.theme-toggle {
+  position: fixed;
+  bottom: 1rem;
+  left: 1rem;
+  z-index: 1001;
+  background: var(--toggle-bg);
+  color: var(--toggle-text);
+  border: none;
+  border-radius: 20px;
+  padding: 0.35rem 0.85rem;
+  font-size: 0.8rem;
+  cursor: pointer;
+  font-family: Helvetica, Arial, sans-serif;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+  transition: background 0.2s ease, color 0.2s ease;
+
+  &:hover {
+    opacity: 0.85;
+  }
+}

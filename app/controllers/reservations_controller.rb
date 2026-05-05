@@ -17,11 +17,9 @@ class ReservationsController < ApplicationController
       @reservation.end_time = @reservation.start_time + dur.hours
     end
 
-    # 4. Try to save!
     if @reservation.save
       redirect_to kitchen_path(@kitchen), notice: "Reservation was successfully created! 🍳"
     else
-      # If it fails, we show them an error message!
       redirect_to kitchen_path(@kitchen), alert: @reservation.errors.full_messages.to_sentence
     end
   end
@@ -36,8 +34,6 @@ class ReservationsController < ApplicationController
 
   private
 
-  # This is a security feature called "Strong Parameters" 
-  # It prevents hackers from submitting malicious data into your database
   def reservation_params
     params.require(:reservation).permit(:start_time, :end_time, :netid)
   end
