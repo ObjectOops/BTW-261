@@ -1,2 +1,5 @@
 <% content_for :title, "Recipes" %>
-<%= react_component("RecipeIndex", props: @recipes_props, prerender: false) %>
+
+<div class="page-island">
+  <%= react_component("RecipeIndex", props: @recipes_props, prerender: false) %>
+</div>
