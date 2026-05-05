@@ -1,2 +1,5 @@
 <% content_for :title, "Recipe Comments | Management" %>
-<%= react_component("AdminRecipeComments", props: @admin_props, prerender: false) %>
+
+<div class="page-island">
+  <%= react_component("AdminRecipeComments", props: @admin_props, prerender: false) %>
+</div>
