@@ -8,3 +8,70 @@
  *
  * Consider organizing styles into separate files for maintainability.
  */
+
+/*
+ * Critical styles loaded synchronously via Propshaft to prevent flash of unstyled content.
+ * The full design system lives in app/javascript/src/styles/ (compiled via Shakapacker).
+ * These rules apply the minimum needed before that JS bundle executes.
+ * 
+ * Addendum: These styles were produced in an attempt to resolve the FUOC issue described above.
+ * The issue has been resolved another way, but we're keeping this as a "fallback".
+ */
+
+:root {
+  --bg-color: #d6e8f7;
+  --nav-bg: #132a45;
+  --island-bg: #ffffff;
+  --text-color: #1a1a1a;
+}
+
+html.dark {
+  --bg-color: #0d1b2a;
+  --nav-bg: #0a1828;
+  --island-bg: #1a2d42;
+  --text-color: #e4edf5;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+.page-island {
+  background: var(--island-bg);
+  width: 90%;
+  max-width: 960px;
+  margin: 2rem auto;
+  border-radius: 8px;
+  padding: 2rem 2.5rem;
+}
+
+.site-navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 56px;
+  background: var(--nav-bg);
+  z-index: 1000;
+}
+
+.navbar-menu {
+  transform: translateX(-100%);
+}
+
+.navbar-overlay {
+  display: none;
+}
+
+.page-wrapper {
+  padding-top: 56px;
+}

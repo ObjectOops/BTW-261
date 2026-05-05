@@ -1,0 +1,39 @@
+:root {
+  --bg-color: #d6e8f7;
+  --bg-logo: url('/illinois_logo_limited_use_black.svg');
+  --island-bg: #ffffff;
+  --island-shadow: 0 2px 12px rgba(0, 0, 0, 0.10);
+  --text-color: #1a1a1a;
+  --text-muted: #5a6472;
+  --link-color: #e04e00;
+  --link-hover: #c04000;
+  --nav-bg: #132a45;
+  --nav-text: #f0f4f8;
+  --nav-accent: #FF5F05;
+  --border-color: #d0dae6;
+  --footer-bg: #0e2038;
+  --footer-text: #a8bdd0;
+  --toggle-bg: #b0c8e0;
+  --toggle-text: #1a2b3c;
+  --card-hover-border: #e04e00;
+}
+
+html.dark {
+  --bg-color: #0d1b2a;
+  --bg-logo: url('/illinois_logo_limited_use_white.svg');
+  --island-bg: #1a2d42;
+  --island-shadow: 0 2px 16px rgba(0, 0, 0, 0.40);
+  --text-color: #e4edf5;
+  --text-muted: #8da6be;
+  --link-color: #ff8040;
+  --link-hover: #ffaa70;
+  --nav-bg: #0a1828;
+  --nav-text: #e4edf5;
+  --nav-accent: #FF7A30;
+  --border-color: #2d4560;
+  --footer-bg: #070f18;
+  --footer-text: #7a98b4;
+  --toggle-bg: #1e3450;
+  --toggle-text: #a8c4de;
+  --card-hover-border: #ff8040;
+}

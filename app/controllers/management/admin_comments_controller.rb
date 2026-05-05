@@ -1,4 +1,4 @@
-class AdminController < ApplicationController
+class Management::AdminCommentsController < Management::BaseController
   def index
     comments = Comment.order(created_at: :desc)
     @admin_props = {

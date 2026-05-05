@@ -28,6 +28,13 @@ const commonWebpackConfig = () => {
         cssLoader.options.modules.namedExport = false;
         cssLoader.options.modules.exportLocalsConvention = 'camelCase';
       }
+
+      // Don't try to bundle absolute-path URLs (e.g. /public assets served by Rails)
+      if (cssLoader && cssLoader.options) {
+        cssLoader.options.url = {
+          filter: (url) => !url.startsWith('/'),
+        };
+      }
     }
   });
 

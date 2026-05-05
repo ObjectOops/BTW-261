@@ -1,30 +1,28 @@
 Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-  
+
   # Defines the root path route ("/")
   root "home#index"
 
-  resources :comments, only: [:index, :create]
-  get "/admin", to: "admin#index"
-
-  get  "/recipes",                     to: "recipes#index"
-  get  "/recipes/:slug",               to: "recipes#show",           as: :recipe
-  get  "/recipes/:slug/comment",       to: "recipe_comments#new",    as: :new_recipe_comment
-  post "/recipes/:slug/comments",      to: "recipe_comments#create", as: :recipe_comments
-  get  "/admin/recipe-comments",       to: "admin_recipe_comments#index"
-  delete "/admin/recipe-comments/:id", to: "admin_recipe_comments#destroy", as: :admin_recipe_comment
-
-  resources :photo_submissions, only: [:index, :create]
-  
-  # Routes for admins to review photos, fetch the raw image data, and delete them
-  resources :admin_reviews, only: [:index, :destroy] do
-    member do
-      get :image # Creates the /admin_reviews/:id/image endpoint
-    end
+  resources :recipes, only: [:index, :show], param: :slug do
+    get  'comments/new', to: 'recipe_comments#new',    as: :new_comment
+    post 'comments',     to: 'recipe_comments#create', as: :comments
   end
-  
-  resources :kitchens do
+
+  resources :kitchens, only: [:index, :show] do
     resources :reservations, only: [:new, :create, :index, :destroy]
+  end
+
+  resources :photos,   only: [:index, :create], controller: 'photo_submissions'
+  resources :comments, only: [:index, :create]
+
+  namespace :management do
+    root 'dashboard#index'
+    resources :comments,        only: [:index],           controller: 'admin_comments'
+    resources :recipe_comments, only: [:index, :destroy]
+    resources :photo_reviews,   only: [:index, :destroy] do
+      member { get :image }
+    end
   end
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

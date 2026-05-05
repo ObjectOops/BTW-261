@@ -1,21 +1,27 @@
-<% content_for :title, "Communal Kitchen" %>
+<% content_for :title, "Foodstuff" %>
 
-<main style="max-width: 600px; margin: 60px auto; padding: 0 20px; font-family: sans-serif;">
-  <h1>Communal Kitchen</h1>
-  <p>Manage your shared kitchen space.</p>
+<div class="page-island">
+  <header class="home-header">
+    <h1>Welcome to Foodstuff</h1>
+    <p class="subtitle">Your shared kitchen community at Illinois.</p>
+  </header>
 
-  <nav style="display: flex; flex-direction: column; gap: 12px; margin-top: 32px;">
-    <a href="/recipes" style="padding: 14px 20px; border: 1px solid #ccc; text-decoration: none; color: inherit;">
-      Recipes
+  <nav class="home-nav">
+    <a href="/recipes" class="home-nav-card">
+      <span class="card-title">Recipes</span>
+      <span class="card-desc">Browse recipes</span>
     </a>
-    <a href="/kitchens" style="padding: 14px 20px; border: 1px solid #ccc; text-decoration: none; color: inherit;">
-      Kitchen Reservation
+    <a href="/kitchens" class="home-nav-card">
+      <span class="card-title">Kitchen Reservations</span>
+      <span class="card-desc">Book a shared kitchen</span>
     </a>
-    <a href="/photo_submissions" style="padding: 14px 20px; border: 1px solid #ccc; text-decoration: none; color: inherit;">
-      Photo Uploads &amp; Verification
+    <a href="/photos" class="home-nav-card">
+      <span class="card-title">Photo Submissions</span>
+      <span class="card-desc">Upload a kitchen photo for review</span>
     </a>
-    <a href="/comments" style="padding: 14px 20px; border: 1px solid #ccc; text-decoration: none; color: inherit;">
-      Comments
+    <a href="/comments" class="home-nav-card">
+      <span class="card-title">Feedback</span>
+      <span class="card-desc">Leave a comment</span>
     </a>
   </nav>
-</main>
+</div>

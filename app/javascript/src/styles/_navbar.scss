@@ -1,0 +1,105 @@
+.site-navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 56px;
+  background: var(--nav-bg);
+  display: flex;
+  align-items: center;
+  padding: 0 1rem;
+  z-index: 1000;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.navbar-hamburger {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  flex-shrink: 0;
+
+  span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--nav-text);
+    border-radius: 2px;
+    transition: all 0.2s ease;
+  }
+
+  &.open span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  &.open span:nth-child(2) {
+    opacity: 0;
+  }
+
+  &.open span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+}
+
+.navbar-brand {
+  font-family: "Liu Jian Mao Cao", cursive;
+  font-weight: 400;
+  font-size: 1.6rem;
+  color: var(--nav-accent);
+  text-decoration: none;
+  margin-left: 0.75rem;
+
+  &:hover {
+    color: var(--nav-accent);
+    text-decoration: none;
+    opacity: 0.85;
+  }
+}
+
+.navbar-menu {
+  position: fixed;
+  top: 56px;
+  left: 0;
+  width: 240px;
+  background: var(--nav-bg);
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.3);
+  padding: 0.5rem 0;
+  transform: translateX(-100%);
+  transition: transform 0.22s ease;
+  z-index: 999;
+
+  &.open {
+    transform: translateX(0);
+  }
+}
+
+.navbar-menu-link {
+  display: block;
+  padding: 0.75rem 1.5rem;
+  color: var(--nav-text);
+  font-size: 0.95rem;
+  text-decoration: none;
+  border-left: 3px solid transparent;
+  transition: background 0.15s ease, border-color 0.15s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.06);
+    border-left-color: var(--nav-accent);
+    color: var(--nav-text);
+    text-decoration: none;
+  }
+}
+
+.navbar-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 998;
+
+  &.open {
+    display: block;
+  }
+}

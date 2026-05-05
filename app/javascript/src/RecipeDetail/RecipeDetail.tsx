@@ -70,7 +70,7 @@ const RecipeDetail: React.FC<Props> = ({ recipe, comments, recipeSlug }) => {
           </ul>
         )}
         <a
-          href={`/recipes/${recipeSlug}/comment`}
+          href={`/recipes/${recipeSlug}/comments/new`}
           style={{
             display: 'inline-block',
             padding: '10px 20px',

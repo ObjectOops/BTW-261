@@ -21,7 +21,7 @@ const AdminRecipeComments: React.FC<Props> = ({ comments: initial }) => {
   const handleDelete = async (id: number) => {
     setDeleting(id);
     try {
-      const res = await fetch(`/admin/recipe-comments/${id}`, {
+      const res = await fetch(`/management/recipe_comments/${id}`, {
         method: 'DELETE',
         headers: { 'X-CSRF-Token': csrfToken() },
       });
