@@ -3,6 +3,7 @@ import React from 'react';
 interface Comment {
   id: number;
   body: string;
+  netId: string | null;
   createdAt: string;
 }
 
@@ -21,7 +22,10 @@ const AdminComments: React.FC<Props> = ({ comments }) => {
           {comments.map((comment) => (
             <li key={comment.id}>
               <p>{comment.body}</p>
-              <small>{new Date(comment.createdAt).toLocaleString()}</small>
+              <small>
+                {comment.netId && <>{comment.netId} · </>}
+                {new Date(comment.createdAt).toLocaleString()}
+              </small>
             </li>
           ))}
         </ul>

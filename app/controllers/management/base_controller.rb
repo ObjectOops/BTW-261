@@ -4,7 +4,7 @@ class Management::BaseController < ApplicationController
   private
 
   def require_management_auth
-    # Shibboleth auth will be wired here for production.
-    # No-op during development.
+    # Protected at Apache level via public/management/.htaccess (Shibboleth).
+    # No-op in Rails — web server enforces the session before Passenger handles the request.
   end
 end

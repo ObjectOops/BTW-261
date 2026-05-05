@@ -1,0 +1,56 @@
+.comment-form {
+  h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1.25rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  label {
+    display: block;
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+  }
+
+  &__textarea {
+    width: 100%;
+    padding: 0.625rem 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background: transparent;
+    color: var(--text-color);
+    font-family: inherit;
+    font-size: 1rem;
+    resize: vertical;
+    box-sizing: border-box;
+  }
+
+  &__error {
+    color: #c00;
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+  }
+
+  &__submit {
+    margin-top: 0.75rem;
+    padding: 0.5rem 1.5rem;
+    border: 1px solid var(--text-color);
+    border-radius: 4px;
+    background: transparent;
+    color: var(--text-color);
+    font-size: 0.875rem;
+    cursor: pointer;
+
+    &:hover:not(:disabled) {
+      border-color: var(--link-color);
+      color: var(--link-color);
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+}

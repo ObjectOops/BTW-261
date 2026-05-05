@@ -10,7 +10,7 @@ const CommentForm: React.FC = () => {
     return meta ? (meta as HTMLMetaElement).content : '';
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setStatus('submitting');
 
@@ -39,26 +39,25 @@ const CommentForm: React.FC = () => {
   };
 
   return (
-    <div>
+    <div className="comment-form">
       <h1>Leave a Comment</h1>
       {status === 'success' ? (
         <p>Comment submitted!</p>
       ) : (
         <form onSubmit={handleSubmit}>
           <div>
-            <label htmlFor="comment-body">Your comment</label>
-            <br />
+            <label htmlFor="comment-body">Let us know if this site helped you. Your NetID will be recorded.</label>
             <textarea
               id="comment-body"
+              className="comment-form__textarea"
               value={body}
               onChange={(e) => setBody(e.target.value)}
               rows={5}
-              cols={60}
               required
             />
           </div>
-          {status === 'error' && <p style={{ color: 'red' }}>{errorMessage}</p>}
-          <button type="submit" disabled={status === 'submitting'}>
+          {status === 'error' && <p className="comment-form__error">{errorMessage}</p>}
+          <button type="submit" className="comment-form__submit" disabled={status === 'submitting'}>
             {status === 'submitting' ? 'Submitting...' : 'Submit'}
           </button>
         </form>

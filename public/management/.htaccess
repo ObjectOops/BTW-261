@@ -1,0 +1,10 @@
+AuthType Shibboleth
+ShibRequestSetting requireSession 1
+Require shib-session
+
+# To restrict to specific NetIDs instead of any Illinois user, replace
+# "Require shib-session" with one of:
+#
+#   Require shib-user netid1@illinois.edu netid2@illinois.edu
+#
+#   Require shib-attr member "urn:mace:uiuc.edu:urbana:unitname:foldername:group name"
