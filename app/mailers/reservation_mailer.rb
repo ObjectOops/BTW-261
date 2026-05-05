@@ -8,6 +8,7 @@ class ReservationMailer
       Hi #{reservation.netid},
 
       Your kitchen reservation has been confirmed.
+      Here is your reservation for reference:
 
       Kitchen: #{reservation.kitchen.name} (#{reservation.kitchen.location})
       Date:    #{reservation.start_time.strftime('%A, %B %d, %Y')}
@@ -15,9 +16,19 @@ class ReservationMailer
 
       #{reservation.additional_netids.present? ? "Additional guests: #{reservation.additional_netids}\n" : ''}
       #{reservation.comment.present? ? "Note: #{reservation.comment}\n" : ''}
-      Questions? Reply to this email or visit the Foodstuff site.
 
-      – Foodstuff
+      ‼️This is a friendly reminder of a few important guidelines to follow during your reservation:
+
+      . Before you begin using the kitchen, please take clear photos of the space and upload them as required.
+      . After you finish, please take another set of photos to document the condition of the kitchen and upload them as well.
+
+      These steps help us maintain a clean and fair shared environment for all residents.
+
+      If you have any questions or encounter any issues during your reservation, please feel free to reach out to the front desk staff of your assigned kitchen location for assistance.
+
+      Thank you for your cooperation, and we hope you have a great experience!
+      
+      Foodstuff
     TEXT
 
     system(
