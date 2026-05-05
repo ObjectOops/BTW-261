@@ -1,18 +1,20 @@
-<div class="page-island">
-  <div style="background-color: #e9ecef; padding: 30px; border-radius: 10px; text-align: center; margin-bottom: 30px;">
-    <h1 style="margin: 0; color: #2c3e50;">🧑‍🍳 Shared Kitchen Reservations</h1>
-    <p style="color: #555; font-size: 1.2rem; margin-top: 10px;">
+<div class="page-island kitchens-index">
+  <div class="kitchens-index__hero">
+    <h1 class="kitchens-index__title">Shared Kitchen Reservations</h1>
+    <p class="kitchens-index__subtitle">
       Select a kitchen below to view availability and book your cooking time.
     </p>
   </div>
 
-  <h2>Available Kitchens</h2>
-  <ul>
+  <h2 class="kitchens-index__section-heading">Available Kitchens</h2>
+  <ul class="kitchens-index__list">
     <% @kitchens.each do |kitchen| %>
-      <li style="margin-bottom: 15px;">
-        <strong><%= kitchen.name %></strong> (Location: <%= kitchen.location %>) 
-        <br>
-        <%= link_to "View & Book this Kitchen", kitchen_path(kitchen) %>
+      <li class="kitchens-index__item">
+        <div class="kitchens-index__item-info">
+          <span class="kitchens-index__item-name"><%= kitchen.name %></span>
+          <span class="kitchens-index__item-meta"><%= kitchen.location %> &middot; capacity <%= kitchen.capacity %></span>
+        </div>
+        <%= link_to "View & Book", kitchen_path(kitchen), class: "kitchens-index__item-link" %>
       </li>
     <% end %>
   </ul>

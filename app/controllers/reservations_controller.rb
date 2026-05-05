@@ -1,40 +1,55 @@
 class ReservationsController < ApplicationController
+  before_action :require_auth, only: [:create, :destroy]
+  before_action :set_kitchen
+  before_action :set_reservation, only: [:destroy]
+
   def create
-    @kitchen = Kitchen.find(params[:kitchen_id])
-    
-    # 1. Grab the raw data from the new form
-    date_string = params[:reservation_date]
-    start_h = params[:start_hour].to_i
-    dur = params[:duration].to_i
+    date_string = params[:date]
+    start_hour  = params[:startHour].to_i
+    duration    = params[:duration].to_i
 
-    # 2. Build the reservation with the NetID
-    @reservation = @kitchen.reservations.build(netid: params[:netid])
+    @reservation = @kitchen.reservations.build(
+      netid:             current_net_id,
+      comment:           params[:comment],
+      additional_netids: params[:additionalNetids].presence
+    )
 
-    # 3. Combine the Date and Hour into a real Ruby Time object
     if date_string.present?
       date = Date.parse(date_string)
-      @reservation.start_time = Time.zone.local(date.year, date.month, date.day, start_h)
-      @reservation.end_time = @reservation.start_time + dur.hours
+      @reservation.start_time = Time.zone.local(date.year, date.month, date.day, start_hour)
+      @reservation.end_time   = @reservation.start_time + duration.hours
     end
 
     if @reservation.save
-      redirect_to kitchen_path(@kitchen), notice: "Reservation was successfully created! 🍳"
+      ReservationMailer.confirmation(@reservation)
+      render json: { success: true }, status: :created
     else
-      redirect_to kitchen_path(@kitchen), alert: @reservation.errors.full_messages.to_sentence
+      render json: { errors: @reservation.errors.full_messages }, status: :unprocessable_entity
     end
   end
 
   def destroy
-    @kitchen = Kitchen.find(params[:kitchen_id])
-    @reservation = @kitchen.reservations.find(params[:id])
-    
+    if @reservation.netid != current_net_id
+      render json: { error: 'Not authorized to cancel this reservation.' }, status: :forbidden
+      return
+    end
+
     @reservation.destroy
-    redirect_to kitchen_path(@kitchen), notice: "Reservation was successfully canceled."
+    render json: { success: true }
   end
 
   private
 
-  def reservation_params
-    params.require(:reservation).permit(:start_time, :end_time, :netid)
+  def require_auth
+    return if current_net_id.present?
+    render json: { error: 'You must be logged in to do that.' }, status: :unauthorized
+  end
+
+  def set_kitchen
+    @kitchen = Kitchen.find(params[:kitchen_id])
+  end
+
+  def set_reservation
+    @reservation = @kitchen.reservations.find(params[:id])
   end
 end
