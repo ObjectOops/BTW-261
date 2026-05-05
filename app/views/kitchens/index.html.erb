@@ -6,6 +6,10 @@
     </p>
   </div>
 
+  <div class="kitchens-index__rules-bar">
+    <%= link_to "‼️Kitchen Rules‼️", kitchen_rules_path, class: "kitchens-index__rules-link" %>
+  </div>
+
   <h2 class="kitchens-index__section-heading">Available Kitchens</h2>
   <ul class="kitchens-index__list">
     <% @kitchens.each do |kitchen| %>

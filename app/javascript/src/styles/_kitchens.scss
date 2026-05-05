@@ -69,6 +69,21 @@
     color: var(--text-muted);
   }
 
+  &__rules-bar {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 1rem;
+  }
+
+  &__rules-link {
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--link-color);
+    text-decoration: none;
+
+    &:hover { text-decoration: underline; }
+  }
+
   &__item-link {
     font-size: 0.9rem;
     color: var(--link-color);
@@ -82,19 +97,57 @@
   }
 }
 
-// ── Kitchen show ─────────────────────────────────────────────────────────────
+// ── Kitchen rules ────────────────────────────────────────────────────────────
 
-.kitchen-show {
+.kitchen-rules {
   &__back {
     display: inline-block;
     font-size: 0.875rem;
     color: var(--link-color);
     text-decoration: none;
-    margin-bottom: 1.25rem;
+    margin-bottom: 1.5rem;
 
-    &:hover {
-      text-decoration: underline;
-    }
+    &:hover { text-decoration: underline; }
+  }
+
+  &__body {
+    line-height: 1.7;
+    color: var(--text-color);
+
+    h1, h2, h3 { margin: 1.25em 0 0.5em; color: var(--text-color); }
+    p  { margin: 0 0 0.75em; }
+    ul, ol { padding-left: 1.5em; margin: 0 0 0.75em; }
+    li { margin-bottom: 0.3em; }
+    hr { border: none; border-top: 1px solid var(--border-color); margin: 1.5em 0; }
+    a  { color: var(--link-color); &:hover { color: var(--link-hover); } }
+  }
+}
+
+// ── Kitchen show ─────────────────────────────────────────────────────────────
+
+.kitchen-show {
+  &__nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.25rem;
+  }
+
+  &__back {
+    font-size: 0.875rem;
+    color: var(--link-color);
+    text-decoration: none;
+
+    &:hover { text-decoration: underline; }
+  }
+
+  &__rules-link {
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--link-color);
+    text-decoration: none;
+
+    &:hover { text-decoration: underline; }
   }
 
   &__header {

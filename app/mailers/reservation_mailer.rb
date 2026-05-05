@@ -17,6 +17,8 @@ class ReservationMailer
       #{reservation.additional_netids.present? ? "Additional guests: #{reservation.additional_netids}\n" : ''}
       #{reservation.comment.present? ? "Note: #{reservation.comment}\n" : ''}
 
+      Kitchen Rules: https://foodstuff.web.illinois.edu/kitchen-rules
+
       ‼️This is a friendly reminder of a few important guidelines to follow during your reservation:
 
       • Before you begin using the kitchen, please take clear photos of the space and upload them as required.
