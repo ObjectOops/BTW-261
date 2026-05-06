@@ -22,7 +22,14 @@ class ReservationsController < ApplicationController
 
     if @reservation.save
       ReservationMailer.confirmation(@reservation)
-      render json: { success: true }, status: :created
+      render json: {
+        id: @reservation.id,
+        netid: @reservation.netid,
+        startTime: @reservation.start_time.iso8601,
+        endTime: @reservation.end_time.iso8601,
+        comment: @reservation.comment,
+        additionalNetids: @reservation.additional_netids
+      }, status: :created
     else
       render json: { errors: @reservation.errors.full_messages }, status: :unprocessable_entity
     end
@@ -31,6 +38,11 @@ class ReservationsController < ApplicationController
   def destroy
     if @reservation.netid != current_net_id
       render json: { error: 'Not authorized to cancel this reservation.' }, status: :forbidden
+      return
+    end
+
+    if @reservation.start_time <= Time.current
+      render json: { error: 'Cannot cancel a reservation that has already begun.' }, status: :unprocessable_entity
       return
     end
 

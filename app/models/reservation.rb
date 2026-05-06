@@ -8,6 +8,8 @@ class Reservation < ApplicationRecord
   validate :no_overlapping_reservations
   validate :duration_must_be_valid
   validate :within_operating_hours
+  validate :max_two_per_day
+  validate :start_time_not_in_past
 
   private
 
@@ -41,5 +43,23 @@ class Reservation < ApplicationRecord
     if start_time.hour < 8 || end_time.hour > 22 || (end_time.hour == 22 && end_time.min > 0)
       errors.add(:base, "The kitchen is only open between 8:00 AM and 10:00 PM.")
     end
+  end
+
+  # Rule 4: Max 2 reservations per netid per day
+  def max_two_per_day
+    return if start_time.blank? || netid.blank?
+
+    count = Reservation.where(netid: netid)
+                       .where.not(id: id)
+                       .where(start_time: start_time.beginning_of_day..start_time.end_of_day)
+                       .count
+    errors.add(:base, 'You may only make 2 reservations per day.') if count >= 2
+  end
+
+  # Rule 5: No past reservations
+  def start_time_not_in_past
+    return if start_time.blank?
+
+    errors.add(:base, 'Reservations cannot be made for times that have already passed.') if start_time < Time.current
   end
 end
