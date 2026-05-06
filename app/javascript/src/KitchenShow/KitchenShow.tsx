@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 
 interface Kitchen {
   id: number;
@@ -89,31 +89,67 @@ interface FormState {
   date: string;
   startHour: number;
   duration: number;
-  additionalNetids: string;
+  additionalNetids: string[];
   comment: string;
 }
+
+const defaultForm = (today: Date): FormState => ({
+  date: toISODateUTC(today),
+  startHour: START_HOUR,
+  duration: 1,
+  additionalNetids: [],
+  comment: '',
+});
 
 const KitchenShow: React.FC<Props> = ({ kitchen, reservations: initialReservations, currentNetId, loginUrl }) => {
   const today = useMemo(() => todayUTC(), []);
 
+  const [reservations, setReservations] = useState<Reservation[]>(initialReservations);
   const [weekOffset, setWeekOffset] = useState(0);
   const [status, setStatus] = useState<'idle' | 'submitting' | 'deleting'>('idle');
   const [errors, setErrors] = useState<string[]>([]);
-  const [form, setForm] = useState<FormState>({
-    date: toISODateUTC(today),
-    startHour: 8,
-    duration: 1,
-    additionalNetids: '',
-    comment: '',
-  });
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
+  const [deleteModal, setDeleteModal] = useState<Reservation | null>(null);
+  const [netidInput, setNetidInput] = useState('');
+  const [form, setForm] = useState<FormState>(() => defaultForm(today));
 
   const weekStart = useMemo(() => addDays(getMondayUTC(today), weekOffset * 7), [today, weekOffset]);
   const weekDates = useMemo(() => DAYS.map((_, i) => addDays(weekStart, i)), [weekStart]);
+
+  // Past-hour guard: auto-advance startHour when today is selected and the chosen hour has passed
+  const minStartHour = useMemo(() => {
+    if (form.date !== toISODateUTC(today)) return START_HOUR;
+    return Math.min(new Date().getUTCHours() + 1, START_HOUR + NUM_HOURS - 1);
+  }, [form.date, today]);
+
+  useEffect(() => {
+    if (form.startHour < minStartHour) {
+      setForm(f => ({ ...f, startHour: minStartHour }));
+    }
+  }, [minStartHour, form.startHour]);
+
+  function addNetid() {
+    const trimmed = netidInput.trim();
+    if (trimmed && !form.additionalNetids.includes(trimmed)) {
+      setForm(f => ({ ...f, additionalNetids: [...f.additionalNetids, trimmed] }));
+    }
+    setNetidInput('');
+  }
+
+  function removeNetid(id: string) {
+    setForm(f => ({ ...f, additionalNetids: f.additionalNetids.filter(n => n !== id) }));
+  }
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setStatus('submitting');
     setErrors([]);
+    setSuccessMessage(null);
+
+    // Commit any pending netid input before submitting
+    const pendingNetids = [...form.additionalNetids];
+    const pending = netidInput.trim();
+    if (pending && !pendingNetids.includes(pending)) pendingNetids.push(pending);
 
     try {
       const res = await fetch(`/kitchens/${kitchen.id}/reservations`, {
@@ -126,7 +162,7 @@ const KitchenShow: React.FC<Props> = ({ kitchen, reservations: initialReservatio
           date: form.date,
           startHour: form.startHour,
           duration: form.duration,
-          additionalNetids: form.additionalNetids || null,
+          additionalNetids: pendingNetids.length > 0 ? pendingNetids.join(', ') : null,
           comment: form.comment || null,
         }),
       });
@@ -134,7 +170,11 @@ const KitchenShow: React.FC<Props> = ({ kitchen, reservations: initialReservatio
       const data = await res.json();
 
       if (res.ok) {
-        window.location.reload();
+        setReservations(r => [...r, data]);
+        setSuccessMessage('confirmed');
+        setForm(defaultForm(today));
+        setNetidInput('');
+        setStatus('idle');
       } else {
         setErrors(data.errors ?? [data.error ?? 'Something went wrong.']);
         setStatus('idle');
@@ -145,8 +185,14 @@ const KitchenShow: React.FC<Props> = ({ kitchen, reservations: initialReservatio
     }
   }
 
-  async function handleDelete(reservation: Reservation) {
-    if (!confirm(`Cancel reservation for ${reservation.netid}?`)) return;
+  function handleDelete(reservation: Reservation) {
+    setDeleteModal(reservation);
+  }
+
+  async function confirmDelete() {
+    const reservation = deleteModal;
+    if (!reservation) return;
+    setDeleteModal(null);
     setStatus('deleting');
 
     try {
@@ -156,7 +202,8 @@ const KitchenShow: React.FC<Props> = ({ kitchen, reservations: initialReservatio
       });
 
       if (res.ok) {
-        window.location.reload();
+        setReservations(r => r.filter(x => x.id !== reservation.id));
+        setStatus('idle');
       } else {
         const data = await res.json();
         alert(data.error ?? 'Could not cancel reservation.');
@@ -177,7 +224,7 @@ const KitchenShow: React.FC<Props> = ({ kitchen, reservations: initialReservatio
     <div className="page-island kitchen-show">
       <div className="kitchen-show__nav">
         <a href="/kitchens" className="kitchen-show__back">← All Kitchens</a>
-        <a href="/kitchen-rules" className="kitchen-show__rules-link">‼️Kitchen Rules‼️</a>
+        <a href="/kitchen-rules" className="kitchen-show__rules-link">Kitchen Rules</a>
       </div>
 
       <div className="kitchen-show__header">
@@ -238,7 +285,7 @@ const KitchenShow: React.FC<Props> = ({ kitchen, reservations: initialReservatio
 
             <div className="kitchen-calendar__days">
               {weekDates.map((date, di) => {
-                const dayReservations = initialReservations.filter(r =>
+                const dayReservations = reservations.filter(r =>
                   isSameUTCDay(new Date(r.startTime), date)
                 );
 
@@ -267,7 +314,7 @@ const KitchenShow: React.FC<Props> = ({ kitchen, reservations: initialReservatio
                           <span className="kitchen-calendar__event-time">
                             {formatHour(start.getUTCHours())}–{formatHour(end.getUTCHours())}
                           </span>
-                          {isOwn && (
+                          {isOwn && start > new Date() && (
                             <button
                               className="kitchen-calendar__event-delete"
                               onClick={() => handleDelete(r)}
@@ -293,6 +340,16 @@ const KitchenShow: React.FC<Props> = ({ kitchen, reservations: initialReservatio
         <section className="reservation-form">
           <h2 className="reservation-form__heading">Make a Reservation</h2>
           <p className="reservation-form__auth-note">Booking as <strong>{currentNetId}</strong></p>
+
+          {successMessage && (
+            <div className="reservation-form__success">
+              Your reservation has been confirmed!{' '}
+              <a href="/kitchen-rules" className="reservation-form__success-link">
+                Review the Kitchen Rules
+              </a>{' '}
+              before your session.
+            </div>
+          )}
 
           {errors.length > 0 && (
             <ul className="reservation-form__errors">
@@ -322,7 +379,7 @@ const KitchenShow: React.FC<Props> = ({ kitchen, reservations: initialReservatio
                 value={form.startHour}
                 onChange={e => setForm(f => ({ ...f, startHour: Number(e.target.value) }))}
               >
-                {HOURS.map(h => (
+                {HOURS.filter(h => h >= minStartHour).map(h => (
                   <option key={h} value={h}>{formatHour(h)}</option>
                 ))}
               </select>
@@ -344,15 +401,39 @@ const KitchenShow: React.FC<Props> = ({ kitchen, reservations: initialReservatio
             <div className="reservation-form__row">
               <label className="reservation-form__label" htmlFor="res-guests">
                 Additional NetIDs
-                <span className="reservation-form__hint"> (optional, comma-separated)</span>
+                <span className="reservation-form__hint"> (optional — press Enter or comma to add)</span>
               </label>
+              {form.additionalNetids.length > 0 && (
+                <div className="netid-chips">
+                  {form.additionalNetids.map(id => (
+                    <span key={id} className="netid-chip">
+                      {id}
+                      <button
+                        type="button"
+                        className="netid-chip__remove"
+                        onClick={() => removeNetid(id)}
+                        aria-label={`Remove ${id}`}
+                      >
+                        ×
+                      </button>
+                    </span>
+                  ))}
+                </div>
+              )}
               <input
                 id="res-guests"
                 type="text"
                 className="reservation-form__input"
-                placeholder="e.g. abc123, xyz456"
-                value={form.additionalNetids}
-                onChange={e => setForm(f => ({ ...f, additionalNetids: e.target.value }))}
+                placeholder="netid1 netid2 netid3"
+                value={netidInput}
+                onChange={e => setNetidInput(e.target.value.toLowerCase().replace(/[^a-z0-9]/g, ''))}
+                onKeyDown={e => {
+                  if (e.key === 'Enter' || e.key === ',' || e.key === ' ') {
+                    e.preventDefault();
+                    addNetid();
+                  }
+                }}
+                onBlur={addNetid}
               />
             </div>
 
@@ -388,6 +469,26 @@ const KitchenShow: React.FC<Props> = ({ kitchen, reservations: initialReservatio
               : 'Authentication is not available in this environment.'}
           </p>
         </section>
+      )}
+
+      {/* Delete confirmation modal */}
+      {deleteModal && (
+        <div className="reservation-modal" onClick={() => setDeleteModal(null)}>
+          <div className="reservation-modal__card" onClick={e => e.stopPropagation()}>
+            <h3 className="reservation-modal__heading">Cancel Reservation?</h3>
+            <p className="reservation-modal__body">
+              {deleteModal.netid} &mdash; {formatHour(new Date(deleteModal.startTime).getUTCHours())} to {formatHour(new Date(deleteModal.endTime).getUTCHours())}, {formatDateLabel(new Date(deleteModal.startTime))}
+            </p>
+            <div className="reservation-modal__actions">
+              <button className="reservation-modal__confirm" onClick={confirmDelete}>
+                Yes, Cancel
+              </button>
+              <button className="reservation-modal__dismiss" onClick={() => setDeleteModal(null)}>
+                Keep It
+              </button>
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );
