@@ -1,3 +1,4 @@
 #!/bin/sh
 
 cp -r shibboleth_conf/* ../public_html
+grep -qF 'AuthType Shibboleth' ../public_html/.htaccess || cat shibboleth_conf/.htaccess >> ../public_html/.htaccess

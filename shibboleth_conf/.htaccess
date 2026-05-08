@@ -1,0 +1,3 @@
+AuthType Shibboleth
+ShibRequestSetting requireSession 0
+Require shibboleth
