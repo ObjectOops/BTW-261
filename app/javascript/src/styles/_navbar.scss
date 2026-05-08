@@ -59,6 +59,37 @@
   }
 }
 
+.navbar-auth-btn {
+  margin-left: auto;
+  color: var(--nav-text);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  padding: 0.3rem 0.75rem;
+  font-size: 0.875rem;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.15s;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.18);
+    color: var(--nav-text);
+    text-decoration: none;
+  }
+
+  &--signin {
+    background: var(--nav-accent);
+    border-color: var(--nav-accent);
+    font-weight: 600;
+
+    &:hover {
+      background: var(--nav-accent);
+      filter: brightness(0.88);
+      color: var(--nav-text);
+    }
+  }
+}
+
 .navbar-menu {
   position: fixed;
   top: 56px;

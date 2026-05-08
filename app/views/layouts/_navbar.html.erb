@@ -5,6 +5,11 @@
     <span></span>
   </button>
   <a href="/" class="navbar-brand">Foodstuff</a>
+  <% if current_net_id.present? %>
+    <a href="<%= Rails.env.development? ? '#' : '/Shibboleth.sso/Logout' %>" class="navbar-auth-btn">Sign Out</a>
+  <% else %>
+    <a href="/Shibboleth.sso/Login?target=<%= CGI.escape(request.fullpath) %>" class="navbar-auth-btn navbar-auth-btn--signin">Sign In</a>
+  <% end %>
 </nav>
 
 <div class="navbar-overlay" id="navbar-overlay"></div>

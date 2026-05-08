@@ -195,9 +195,9 @@ $calendar-time-width: 4rem;
   font-size: 0.8rem;
 
   &__nav {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
     align-items: center;
-    gap: 1rem;
     padding: 0.6rem 0.75rem;
     border-bottom: 1px solid var(--border-color);
     background: var(--island-bg);
@@ -226,6 +226,15 @@ $calendar-time-width: 4rem;
   &__week-label {
     font-size: 0.85rem;
     color: var(--text-muted);
+    text-align: center;
+  }
+
+  &__nav-btn:last-child {
+    justify-self: end;
+  }
+
+  &__nav-btn:first-child {
+    justify-self: start;
   }
 
   // Single scroll container — header and body share the same scrollable width
