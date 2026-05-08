@@ -26,7 +26,9 @@ class Recipe
   end
 
   def self.find(slug)
+    return nil unless slug.match?(/\A[a-z0-9][a-z0-9\-]*\z/)
     dir = RECIPES_DIR.join(slug).to_s
+    return nil unless dir.start_with?(RECIPES_DIR.to_s + '/')
     return nil unless File.directory?(dir)
     md_path = File.join(dir, 'recipe.md')
     return nil unless File.exist?(md_path)
