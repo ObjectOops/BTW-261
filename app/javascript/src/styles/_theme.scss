@@ -1,6 +1,7 @@
 :root {
   --bg-color: #d6e8f7;
-  --bg-logo: url('/illinois_logo_limited_use_black.svg');
+  --bg-left: url('/illinois_logo_limited_use_black.svg');
+  --bg-right: url('/illinois_logo_limited_use_black.svg');
   --island-bg: #ffffff;
   --island-shadow: 0 2px 12px rgba(0, 0, 0, 0.10);
   --text-color: #1a1a1a;
@@ -20,7 +21,8 @@
 
 html.dark {
   --bg-color: #0d1b2a;
-  --bg-logo: url('/illinois_logo_limited_use_white.svg');
+  --bg-left: url('/illinois_logo_limited_use_white.svg');
+  --bg-right: url('/illinois_logo_limited_use_white.svg');
   --island-bg: #1a2d42;
   --island-shadow: 0 2px 16px rgba(0, 0, 0, 0.40);
   --text-color: #e4edf5;
