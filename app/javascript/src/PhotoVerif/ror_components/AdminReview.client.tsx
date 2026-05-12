@@ -1,8 +1,15 @@
 import { useState } from 'react';
 
+interface Image {
+  id: number;
+}
+
 interface Submission {
   id: number;
-  net_ids: string;
+  net_id: string;
+  kitchen: string;
+  date: string;
+  images: Image[];
 }
 
 interface Props {
@@ -21,7 +28,6 @@ const AdminReview = ({ initialSubmissions }: Props) => {
     });
 
     if (response.ok) {
-      // Remove it from the UI once successfully deleted from the database
       setSubmissions(submissions.filter(sub => sub.id !== id));
     } else {
       alert('Failed to process review.');
@@ -32,18 +38,25 @@ const AdminReview = ({ initialSubmissions }: Props) => {
     <div style={{ padding: '2rem' }}>
       <h2>Admin Photo Review</h2>
       {submissions.length === 0 ? <p>No photos pending review.</p> : null}
-      
+
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: '2rem' }}>
         {submissions.map((sub) => (
-          <div key={sub.id} style={{ border: '1px solid #ccc', padding: '1rem' }}>
-            <p><strong>NetIDs:</strong> {sub.net_ids}</p>
-            {/* The image src points directly to the controller endpoint we made */}
-            <img 
-              src={`/management/photo_reviews/${sub.id}/image`}
-              alt="Verification" 
-              style={{ maxWidth: '300px', display: 'block', marginBottom: '1rem' }} 
-            />
-            <button onClick={() => handleReview(sub.id)}>Mark as Reviewed (Delete)</button>
+          <div key={sub.id} style={{ border: '1px solid #ccc', padding: '1rem', maxWidth: '400px' }}>
+            <p><strong>NetID:</strong> {sub.net_id}</p>
+            <p><strong>Kitchen:</strong> {sub.kitchen}</p>
+            <p><strong>Date:</strong> {sub.date}</p>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '1rem' }}>
+              {sub.images.map(img => (
+                <img
+                  key={img.id}
+                  src={`/management/submission_photos/${img.id}`}
+                  alt="Submission photo"
+                  style={{ maxWidth: '180px', maxHeight: '180px', objectFit: 'cover' }}
+                />
+              ))}
+            </div>
+            {sub.images.length === 0 && <p><em>No photos.</em></p>}
+            <button onClick={() => handleReview(sub.id)}>Mark as Reviewed</button>
           </div>
         ))}
       </div>
