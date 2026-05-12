@@ -15,16 +15,19 @@ Rails.application.routes.draw do
 
   get 'kitchen-rules', to: 'kitchen_rules#show', as: :kitchen_rules
 
-  resources :photos,   only: [:index, :create], controller: 'photo_submissions'
+  resources :photos, only: [:index, :create, :update], controller: 'photo_submissions' do
+    resources :images, only: [:create, :destroy], controller: 'submission_photos', shallow: true do
+      member { get :file }
+    end
+  end
   resources :comments, only: [:index, :create]
 
   namespace :management do
     root 'dashboard#index'
     resources :comments,        only: [:index],           controller: 'admin_comments'
     resources :recipe_comments, only: [:index, :destroy]
-    resources :photo_reviews,   only: [:index, :destroy] do
-      member { get :image }
-    end
+    resources :photo_reviews,   only: [:index, :destroy]
+    get 'submission_photos/:id', to: 'submission_photos#show', as: :submission_photo
   end
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

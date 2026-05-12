@@ -1,0 +1,274 @@
+body.page-photos {
+  --bg-left: url('/backgrounds/photos/left.svg');
+  --bg-right: url('/backgrounds/photos/right.svg');
+}
+
+// ── Page header ───────────────────────────────────────────────────────────────
+
+.photo-submission {
+  &__title {
+    font-size: 1.75rem;
+    margin: 0 0 0.25rem;
+    color: var(--text-color);
+  }
+
+  &__subtitle {
+    color: var(--text-muted);
+    margin: 0 0 1.5rem;
+    font-size: 0.95rem;
+  }
+}
+
+// ── Section headings ──────────────────────────────────────────────────────────
+
+.photo-submission__section-heading {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-color);
+  margin: 0 0 1rem;
+}
+
+// ── Form rows ─────────────────────────────────────────────────────────────────
+
+.photo-submission__row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  margin-bottom: 1rem;
+}
+
+.photo-submission__label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+// ── Inputs ────────────────────────────────────────────────────────────────────
+
+.photo-submission__select {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  background: var(--island-bg);
+  color: var(--text-color);
+  font-size: 0.9rem;
+  width: 100%;
+
+  &:focus {
+    outline: 2px solid var(--link-color);
+    outline-offset: 1px;
+    border-color: transparent;
+  }
+}
+
+.photo-submission__textarea {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  background: var(--island-bg);
+  color: var(--text-color);
+  font-size: 0.9rem;
+  resize: vertical;
+  font-family: inherit;
+  width: 100%;
+  box-sizing: border-box;
+
+  &:focus {
+    outline: 2px solid var(--link-color);
+    outline-offset: 1px;
+    border-color: transparent;
+  }
+}
+
+// ── Buttons ───────────────────────────────────────────────────────────────────
+
+.photo-submission__btn {
+  background: var(--link-color);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.6rem 1.25rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+
+  &:hover:not(:disabled) {
+    background: var(--link-hover);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: default;
+  }
+}
+
+.photo-submission__btn--secondary {
+  background: none;
+  border: 1px solid var(--border-color);
+  color: var(--text-color);
+  border-radius: 6px;
+  padding: 0.6rem 1.25rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+
+  &:hover:not(:disabled) {
+    background: var(--border-color);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: default;
+  }
+}
+
+// ── Form layout ───────────────────────────────────────────────────────────────
+
+.photo-submission__form {
+  display: flex;
+  flex-direction: column;
+  max-width: 560px;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.photo-submission__edit {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-color);
+  max-width: 560px;
+}
+
+// ── Photo grid ────────────────────────────────────────────────────────────────
+
+.photo-submission__photos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.photo-submission__photo {
+  position: relative;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+
+  img {
+    width: 100%;
+    height: 130px;
+    object-fit: cover;
+    display: block;
+  }
+}
+
+.photo-submission__delete-btn {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  line-height: 1;
+  font-size: 0.85rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.55);
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.1s;
+
+  &:hover:not(:disabled) {
+    background: rgba(192, 0, 0, 0.85);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: default;
+  }
+}
+
+// ── Pending file list ─────────────────────────────────────────────────────────
+
+.photo-submission__file-list {
+  list-style: none;
+  margin: 0.4rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.photo-submission__file-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.3rem 0.6rem;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--link-color) 6%, var(--island-bg));
+  font-size: 0.85rem;
+  color: var(--text-color);
+}
+
+.photo-submission__file-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1;
+  min-width: 0;
+}
+
+.photo-submission__file-size {
+  color: var(--text-muted);
+  white-space: nowrap;
+  font-size: 0.8rem;
+}
+
+.photo-submission__file-remove {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-muted);
+  font-size: 1rem;
+  line-height: 1;
+  padding: 0 0 0 0.4rem;
+  flex-shrink: 0;
+
+  &:hover { color: var(--link-color); }
+}
+
+// ── Status messages ───────────────────────────────────────────────────────────
+
+.photo-submission__success {
+  background: color-mix(in srgb, #22c55e 15%, var(--island-bg));
+  border: 1px solid #22c55e;
+  border-radius: 6px;
+  color: #15803d;
+  padding: 0.75rem 1rem;
+  margin-top: 1rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.photo-submission__error {
+  background: color-mix(in srgb, #c00 10%, var(--island-bg));
+  border: 1px solid #c00;
+  border-radius: 6px;
+  color: #c00;
+  padding: 0.75rem 1rem;
+  margin-top: 1rem;
+  font-size: 0.875rem;
+}
+
+.photo-submission__info {
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  margin-top: 1rem;
+  font-style: italic;
+}

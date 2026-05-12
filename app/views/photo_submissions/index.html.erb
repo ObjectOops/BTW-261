@@ -1,3 +1,5 @@
+<% content_for :body_class, "page-photos" %>
+
 <div class="page-island">
-  <%= react_component("StudentUpload", prerender: false) %>
+  <%= react_component("StudentUpload", props: @photo_submission_props, prerender: false) %>
 </div>

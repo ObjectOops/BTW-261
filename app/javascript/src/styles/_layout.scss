@@ -2,7 +2,7 @@ body {
   font-family: Helvetica, Arial, sans-serif;
   color: var(--text-color);
   background-color: var(--bg-color);
-  background-image: var(--bg-logo), var(--bg-logo);
+  background-image: var(--bg-left), var(--bg-right);
   background-position: left 20px center, right 20px center;
   background-repeat: no-repeat;
   background-size: 120px;

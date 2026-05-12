@@ -1,3 +1,8 @@
+body.page-reservations {
+  --bg-left: url('/backgrounds/kitchens/left.svg');
+  --bg-right: url('/backgrounds/kitchens/right.svg');
+}
+
 // ── Rules link attention animation ───────────────────────────────────────────
 
 @keyframes rules-attention {

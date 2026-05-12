@@ -341,16 +341,6 @@ const KitchenShow: React.FC<Props> = ({ kitchen, reservations: initialReservatio
           <h2 className="reservation-form__heading">Make a Reservation</h2>
           <p className="reservation-form__auth-note">Booking as <strong>{currentNetId}</strong></p>
 
-          {successMessage && (
-            <div className="reservation-form__success">
-              Your reservation has been confirmed!{' '}
-              <a href="/kitchen-rules" className="reservation-form__success-link">
-                Review the Kitchen Rules
-              </a>{' '}
-              before your session.
-            </div>
-          )}
-
           {errors.length > 0 && (
             <ul className="reservation-form__errors">
               {errors.map((e, i) => <li key={i}>{e}</li>)}
@@ -460,6 +450,16 @@ const KitchenShow: React.FC<Props> = ({ kitchen, reservations: initialReservatio
               {status === 'submitting' ? 'Booking…' : 'Confirm Reservation'}
             </button>
           </form>
+
+          {successMessage && (
+            <div className="reservation-form__success" style={{ marginTop: '1rem' }}>
+              Your reservation has been confirmed!{' '}
+              <a href="/kitchen-rules" className="reservation-form__success-link">
+                Review the Kitchen Rules
+              </a>{' '}
+              and the confirmation sent to your email.
+            </div>
+          )}
         </section>
       ) : (
         <section className="reservation-form reservation-form--guest">

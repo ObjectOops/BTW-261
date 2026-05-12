@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_05_05_142216) do
+ActiveRecord::Schema[8.1].define(version: 2026_05_12_014136) do
   create_table "comments", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.text "body", null: false
     t.datetime "created_at", null: false
@@ -27,11 +27,13 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_05_142216) do
   end
 
   create_table "photo_submissions", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
+    t.text "comment"
     t.datetime "created_at", null: false
-    t.string "image_content_type"
-    t.binary "image_data", size: :long
-    t.string "net_ids"
+    t.string "net_id", null: false
+    t.bigint "reservation_id", null: false
+    t.datetime "reviewed_at"
     t.datetime "updated_at", null: false
+    t.index ["reservation_id"], name: "index_photo_submissions_on_reservation_id", unique: true
   end
 
   create_table "recipe_comments", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
@@ -54,5 +56,16 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_05_142216) do
     t.index ["kitchen_id"], name: "index_reservations_on_kitchen_id"
   end
 
+  create_table "submission_photos", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "image_content_type"
+    t.binary "image_data", size: :long
+    t.bigint "photo_submission_id", null: false
+    t.datetime "updated_at", null: false
+    t.index ["photo_submission_id"], name: "index_submission_photos_on_photo_submission_id"
+  end
+
+  add_foreign_key "photo_submissions", "reservations"
   add_foreign_key "reservations", "kitchens"
+  add_foreign_key "submission_photos", "photo_submissions", on_delete: :cascade
 end

@@ -1,5 +1,6 @@
 class Reservation < ApplicationRecord
   belongs_to :kitchen
+  has_one :photo_submission
 
   # Basic checks
   validates :start_time, :end_time, :netid, presence: true
