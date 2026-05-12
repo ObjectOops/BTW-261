@@ -4,7 +4,10 @@
     <span></span>
     <span></span>
   </button>
-  <a href="/" class="navbar-brand">Foodstuff</a>
+  <a href="/" class="navbar-brand">
+    <img src="/favicon.png" alt="" class="navbar-brand-icon" aria-hidden="true">
+    Foodstuff
+  </a>
   <% if current_net_id.present? %>
     <a href="<%= Rails.env.development? ? '#' : '/Shibboleth.sso/Logout' %>" class="navbar-auth-btn">Sign Out</a>
   <% else %>
