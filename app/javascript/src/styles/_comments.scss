@@ -1,3 +1,8 @@
+body.page-comments {
+  --bg-left: url('/backgrounds/comments/left.svg');
+  --bg-right: url('/backgrounds/comments/right.svg');
+}
+
 .comment-form {
   h1 {
     font-size: 1.5rem;

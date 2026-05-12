@@ -1,4 +1,5 @@
 <% content_for :title, "Leave a Comment" %>
+<% content_for :body_class, "page-comments" %>
 
 <div class="page-island">
   <%= react_component("CommentForm", props: {}, prerender: false) %>
