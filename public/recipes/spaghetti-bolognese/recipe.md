@@ -4,7 +4,7 @@ difficulty: medium
 time_minutes: 60
 ingredient_count: 10
 meal_type: dinner
-thumbnail: thumbnail.jpg
+thumbnail: spaghetti_bolognese.jpg
 ---
 
 A rich, slow-simmered meat sauce served over al dente spaghetti. This is the kind of dish that gets better the longer it cooks.

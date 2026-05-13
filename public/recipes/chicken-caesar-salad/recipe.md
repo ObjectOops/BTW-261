@@ -4,7 +4,7 @@ difficulty: easy
 time_minutes: 15
 ingredient_count: 8
 meal_type: lunch
-thumbnail: thumbnail.jpg
+thumbnail: chicken_caesar_salad.jpg
 ---
 
 A crisp, satisfying salad with creamy Caesar dressing, pan-seared chicken, and crunchy croutons. Ready in 15 minutes.
