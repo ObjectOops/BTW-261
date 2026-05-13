@@ -4,7 +4,7 @@ difficulty: easy
 time_minutes: 20
 ingredient_count: 7
 meal_type: breakfast
-thumbnail: thumbnail.jpg
+thumbnail: pancakes.jpg
 ---
 
 Fluffy, golden pancakes that come together in minutes. Perfect for a lazy weekend morning.
