@@ -22,6 +22,8 @@ Rails.application.routes.draw do
   end
   resources :comments, only: [:index, :create]
 
+  get 'about', to: 'about#index'
+
   namespace :management do
     root 'dashboard#index'
     resources :comments,        only: [:index],           controller: 'admin_comments'
