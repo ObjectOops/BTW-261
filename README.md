@@ -4,9 +4,9 @@
 
 Foodstuff is a prototype kitchen reservation and cooking recipes solution developed as a final project for Principles of Technical Communication (BTW 261) at UIUC.
 
+<img width="953" height="407" alt="Preview" src="https://github.com/user-attachments/assets/5c199635-5f3c-4305-8c92-ca1b78ae60a5" />
 
-
-This is a **Ruby on Rails + React** app hosted on Illinois' cPanel with Shibboleth SSO.
+This is a **Ruby on Rails + React** app hosted on Illinois's cPanel with Shibboleth SSO.
 
 ### Features
 
@@ -21,7 +21,7 @@ This is a **Ruby on Rails + React** app hosted on Illinois' cPanel with Shibbole
 - Ruby 4.0.1 or >= 3.2.11
 - Node 18
 
-Dev Container / Codespaces will automatically setup the project.  
+Dev Containers / Codespaces will automatically set up the project.  
 Use the VS Code task "Start Rails (HMR)" to start the development server, or `./bin/dev`.
 
 Manual dependency install:
