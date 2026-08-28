@@ -6,6 +6,8 @@ Foodstuff is a prototype kitchen reservation and cooking recipes solution develo
 
 <img width="953" height="407" alt="Preview" src="https://github.com/user-attachments/assets/5c199635-5f3c-4305-8c92-ca1b78ae60a5" />
 
+Visit at [`foodstuff.web.illinois.edu`](https://foodstuff.web.illinois.edu/).
+
 This is a **Ruby on Rails + React** app hosted on Illinois's cPanel with Shibboleth SSO.
 
 ### Features
